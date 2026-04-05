@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مواضيع باكالوريا اللغة العربية — مصنّفة بالمحاور</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0d14; --card: #1a1a2e; --surface: #13131f; --border: #2a2a45;
+    --gold: #c9a84c; --gold-light: #e8c97a; --gold-dim: rgba(201,168,76,0.12);
+    --text: #e8e0d0; --muted: #7a7a9a;
+    --a1:#4a7fa5; --a2:#8a5fa5; --a3:#5aa57a; --a4:#a55f5f; --a5:#a58a3f;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+  body::before{content:'';position:fixed;inset:0;pointer-events:none;
+    background:radial-gradient(ellipse 80% 50% at 20% 10%,rgba(201,168,76,.04) 0%,transparent 60%),
+              radial-gradient(ellipse 60% 40% at 80% 90%,rgba(74,127,165,.05) 0%,transparent 60%);}
+  .wrap{position:relative;z-index:1;max-width:1020px;margin:0 auto;padding:0 18px 60px;}
+
+  header{text-align:center;padding:55px 16px 30px;}
+  header::after{content:'';display:block;width:100px;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:22px auto 0;}
+  .badge{display:inline-block;font-size:10px;letter-spacing:3px;color:var(--gold);background:var(--gold-dim);border:1px solid rgba(201,168,76,.3);padding:4px 14px;border-radius:20px;margin-bottom:16px;}
+  h1{font-family:'Amiri',serif;font-size:clamp(26px,5vw,44px);font-weight:700;line-height:1.35;margin-bottom:10px;}
+  h1 span{color:var(--gold);}
+  .sub{color:var(--muted);font-size:13px;font-weight:300;}
+
+  .info-box{background:rgba(74,127,165,.08);border:1px solid rgba(74,127,165,.25);border-radius:10px;padding:12px 18px;margin:22px 0 26px;font-size:12px;color:#8ab8d0;line-height:1.7;text-align:center;}
+  .info-box strong{color:#aad0e8;}
+
+  .legend{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:26px;}
+  .leg{font-size:10px;padding:3px 10px;border-radius:4px;border:1px solid;font-weight:600;}
+  .sc{color:#7ab8d8;border-color:rgba(74,127,165,.4);background:rgba(74,127,165,.1);}
+  .ad{color:#c49fe0;border-color:rgba(138,95,165,.4);background:rgba(138,95,165,.1);}
+  .lg{color:#7ad8a8;border-color:rgba(90,165,122,.4);background:rgba(90,165,122,.1);}
+
+  .sec{margin-bottom:34px;border:1px solid var(--border);border-radius:14px;overflow:hidden;background:var(--card);}
+  .sec-head{display:flex;align-items:center;gap:14px;padding:18px 22px;cursor:pointer;user-select:none;transition:background .2s;}
+  .sec-head:hover{background:rgba(255,255,255,.02);}
+  .num{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;border:2px solid;}
+  .sec-info{flex:1;}
+  .sec-title{font-family:'Amiri',serif;font-size:19px;font-weight:700;}
+  .sec-sub{font-size:11px;color:var(--muted);margin-top:2px;font-weight:300;}
+  .arrow{font-size:18px;color:var(--muted);transition:transform .3s;}
+  .sec.open .arrow{transform:rotate(90deg);}
+  .sec-body{display:none;border-top:1px solid var(--border);padding:18px 22px 22px;}
+  .sec.open .sec-body{display:block;}
+
+  .s1 .num{color:var(--a1);border-color:var(--a1);background:rgba(74,127,165,.1);} .s1 .sec-title{color:var(--a1);}
+  .s2 .num{color:var(--a2);border-color:var(--a2);background:rgba(138,95,165,.1);} .s2 .sec-title{color:var(--a2);}
+  .s3 .num{color:var(--a3);border-color:var(--a3);background:rgba(90,165,122,.1);} .s3 .sec-title{color:var(--a3);}
+  .s4 .num{color:var(--a4);border-color:var(--a4);background:rgba(165,95,95,.1);} .s4 .sec-title{color:var(--a4);}
+  .s5 .num{color:var(--a5);border-color:var(--a5);background:rgba(165,138,63,.1);} .s5 .sec-title{color:var(--a5);}
+
+  .sub-lbl{font-size:11px;font-weight:700;letter-spacing:1px;color:var(--muted);margin:18px 0 10px;padding-bottom:6px;border-bottom:1px dashed var(--border);}
+  .sub-lbl:first-child{margin-top:0;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:9px;}
+
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:11px 13px;display:block;transition:all .2s;position:relative;overflow:hidden;}
+  .card::before{content:'';position:absolute;right:0;top:0;bottom:0;width:3px;}
+  .s1 .card::before{background:var(--a1);} .s2 .card::before{background:var(--a2);}
+  .s3 .card::before{background:var(--a3);} .s4 .card::before{background:var(--a4);}
+  .s5 .card::before{background:var(--a5);}
+  .yr{font-size:20px;font-weight:700;color:var(--gold-light);margin-bottom:3px;}
+  .stream{font-size:10px;margin-bottom:5px;display:inline-block;padding:1px 7px;border-radius:3px;}
+  .str-sc{color:#7ab8d8;background:rgba(74,127,165,.15);}
+  .str-ad{color:#c49fe0;background:rgba(138,95,165,.15);}
+  .str-lg{color:#7ad8a8;background:rgba(90,165,122,.15);}
+  .topic{font-size:11px;color:var(--text);font-family:'Amiri',serif;line-height:1.5;margin-bottom:8px;}
+  .btns{display:flex;gap:5px;flex-wrap:wrap;}
+  .btn{font-size:9px;padding:3px 9px;border-radius:4px;text-decoration:none;font-weight:700;font-family:'Cairo',sans-serif;transition:opacity .2s;border:1px solid;}
+  .btn:hover{opacity:.65;}
+  .b-m{background:rgba(74,127,165,.2);color:#7ab8d8;border-color:rgba(74,127,165,.35);}
+  .b-s{background:rgba(201,168,76,.2);color:var(--gold);border-color:rgba(201,168,76,.35);}
+  .new-tag{font-size:8px;background:rgba(90,165,122,.2);color:#7ad8a8;border:1px solid rgba(90,165,122,.3);padding:1px 5px;border-radius:3px;font-weight:700;vertical-align:middle;}
+
+  .note{background:var(--gold-dim);border:1px solid rgba(201,168,76,.2);border-radius:8px;padding:11px 15px;font-size:12px;color:var(--muted);margin-top:16px;line-height:1.7;}
+  .note strong{color:var(--gold);}
+  footer{text-align:center;padding:26px;border-top:1px solid var(--border);color:var(--muted);font-size:11px;margin-top:8px;}
+
+  @media(max-width:560px){.grid{grid-template-columns:1fr 1fr;}.sec-head,.sec-body{padding:14px 14px;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="badge">باكالوريا الجزائر · اللغة العربية وآدابها</div>
+  <h1>مواضيع <span>البكالوريا</span><br>مصنّفة بالمحاور</h1>
+  <p class="sub">روابط مباشرة لكل موضوع + تصحيحه — 2008 إلى 2025</p>
+</header>
+
+<div class="info-box">
+  كل زر <strong>موضوع</strong> يأخذك مباشرة لصفحة ذلك الامتحان على dzexams.pro — اضغط <strong>"تحميل"</strong> داخل الصفحة للحصول على الـ PDF
+</div>
+
+<div class="legend">
+  <span class="leg sc">علمي / تقني</span>
+  <span class="leg ad">آداب وفلسفة</span>
+  <span class="leg lg">لغات أجنبية</span>
+</div>
+
+<!-- ███ 1 ████████████████████████████████████████ -->
+<div class="sec s1 open">
+  <div class="sec-head" onclick="this.closest('.sec').classList.toggle('open')">
+    <div class="num">١</div>
+    <div class="sec-info">
+      <div class="sec-title">النثر العلمي والمتأدب — عصر الضعف</div>
+      <div class="sec-sub">ابن خلدون · النويري · القلقشندي · القزويني</div>
+    </div>
+    <div class="arrow">›</div>
+  </div>
+  <div class="sec-body">
+    <div class="grid">
+      <div class="card">
+        <div class="yr">2014</div><span class="stream str-ad">آداب وفلسفة</span>
+        <div class="topic">موضوع النويري (صعب ومهم)</div>
+        <div class="btns">
+          <a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=51" target="_blank">📄 موضوع + حل</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="yr">2017</div><span class="stream str-lg">لغات أجنبية</span>
+        <div class="topic">القلقشندي — مقارنة الشعر والنثر</div>
+        <div class="btns">
+          <a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=42" target="_blank">📄 موضوع + حل</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="yr">2020</div><span class="stream str-sc">علمي</span>
+        <div class="topic">ابن خلدون — البدو والحضر</div>
+        <div class="btns">
+          <a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=29" target="_blank">📄 موضوع + حل</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="yr">2022</div><span class="stream str-lg">لغات أجنبية</span>
+        <div class="topic">القزويني — وصف الفصول (سهل)</div>
+        <div class="btns">
+          <a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=47" target="_blank">📄 موضوع + حل</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="yr">2024</div><span class="stream str-ad">آداب وفلسفة</span>
+        <div class="topic">ابن خلدون — خصائص النثر العلمي</div>
+        <div class="btns">
+          <a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=618" target="_blank">📄 موضوع + حل</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ███ 2 ████████████████████████████████████████ -->
+<div class="sec s2">
+  <div class="sec-head" onclick="this.closest('.sec').classList.toggle('open')">
+    <div class="num">٢</div>
+    <div class="sec-info">
+      <div class="sec-title">شعر المهجر</div>
+      <div class="sec-sub">التفاؤل · القيم · التشاؤم · الطبيعة · الالتزام الاجتماعي</div>
+    </div>
+    <div class="arrow">›</div>
+  </div>
+  <div class="sec-body">
+    <div class="sub-lbl">◆ الدعوة للتفاؤل</div>
+    <div class="grid">
+      <div class="card"><div class="yr">2008</div><span class="stream str-ad">آداب</span><div class="topic">الدعوة للتفاؤل</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=56" target="_blank">📄 موضوع + حل</a></div></div>
+      <div class="card"><div class="yr">2010</div><span class="stream str-lg">لغات</span><div class="topic">الدعوة للتفاؤل</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=35" target="_blank">📄 موضوع + حل</a></div></div>
+      <div class="card"><div class="yr">2019</div><span class="stream str-sc">علمي</span><div class="topic">الدعوة للتفاؤل</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=28" target="_blank">📄 موضوع + حل</a></div></div>
+    </div>
+    <div class="sub-lbl">◆ المبادئ والقيم</div>
+    <div class="grid">
+      <div class="card"><div class="yr">2017</div><span class="stream str-ad">آداب</span><div class="topic">المبادئ والقيم</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=74" target="_blank">📄 موضوع + حل</a></div></div>
+      <div class="card"><div class="yr">2019</div><span class="stream str-sc">علمي</span><div class="topic">المبادئ والقيم</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=28" target="_blank">📄 موضوع + حل</a></div></div>
+    </div>
+    <div class="sub-lbl">◆ النزعة التشاؤمية — إيليا أبو ماضي</div>
+    <div class="grid">
+      <div class="card"><div class="yr">2016</div><span class="stream str-sc">شعب علمية</span><div class="topic">إيليا أبو ماضي — التشاؤم</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=25" target="_blank">📄 موضوع + حل</a></div></div>
+    </div>
+    <div class="sub-lbl">◆ وصف الطبيعة</div>
+    <div class="grid">
+      <div class="card"><div class="yr">2019</div><span class="stream str-sc">شعب علمية</span><div class="topic">قصيدة أيلول</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=28" target="_blank">📄 موضوع + حل</a></div></div>
+    </div>
+    <div class="sub-lbl">◆ القضايا الاجتماعية والالتزام</div>
+    <div class="grid">
+      <div class="card"><div class="yr">2010</div><span class="stream str-lg">لغات</span><div class="topic">قضية فلسطين — الشعر القروي</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=35" target="_blank">📄 موضوع + حل</a></div></div>
+      <div class="card"><div class="yr">2013</div><span class="stream str-lg">لغات</span><div class="topic">ملتزم ورومانسي</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=38" target="_blank">📄 موضوع + حل</a></div></div>
+      <div class="card"><div class="yr">2024</div><span class="stream str-ad">آداب</span><div class="topic">الفقير — الالتزام الاجتماعي</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=618" target="_blank">📄 موضوع + حل</a></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ███ 3 ████████████████████████████████████████ -->
+<div class="sec s3">
+  <div class="sec-head" onclick="this.closest('.sec').classList.toggle('open')">
+    <div class="num">٣</div>
+    <div class="sec-info">
+      <div class="sec-title">فن المقال</div>
+      <div class="sec-sub">اجتماعي · الالتزام · رومانسي · الصنعة اللفظية · سياسي · نقدي</div>
+    </div>
+    <div class="arrow">›</div>
+  </div>
+  <div class="sec-body">
+    <div class="sub-lbl">◆ المقال الاجتماعي</div>
+    <div class="grid">
+      <div class="card"><div class="yr">2014</div><span class="stream str-sc">علمي</span><div class="topic">مقال اجتماعي</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=23" target="_blank">📄 موضوع + حل</a></div></div>
+      <div class="card"><div class="yr">2015</div><span class="stream str-sc">علمي</span><div class="topic">مقال اجتماعي</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=24" target="_blank">📄 موضوع + حل</a></div></div>
+      <div class="card"><div class="yr">2016</div><span class="stream str-sc">علمي</span><div class="topic">مقال اجتماعي</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=25" target="_blank">📄 موضوع + حل</a></div></div>
+      <div class="card"><div class="yr">2017</div><span class="stream str-lg">لغات دورة 2</span><div class="topic">مقال اجتماعي</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=42" target="_blank">📄 موضوع + حل</a></div></div>
+    </div>
+    <div class="sub-lbl">◆ مقال الالتزام</div>
+    <div class="grid">
+      <div class="card"><div class="yr">2019</div><span class="stream str-lg">لغات</span><div class="topic">حجاجي — العقاد</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=44" target="_blank">📄 موضوع + حل</a></div></div>
+      <div class="card"><div class="yr">2021</div><span class="stream str-lg">لغات</span><div class="topic">الالتزام</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=46" target="_blank">📄 موضوع + حل</a></div></div>
+      <div class="card"><div class="yr">2022</div><span class="stream str-sc">علمي</span><div class="topic">تعريف الالتزام</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=31" target="_blank">📄 موضوع + حل</a></div></div>
+      <div class="card"><div class="yr">2024</div><span class="stream str-sc">علمي</span><div class="topic">الالتزام — فلسطين</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=603" target="_blank">📄 موضوع + حل</a></div></div>
+    </div>
+    <div class="sub-lbl">◆ المقال الرومانسي والنزعة الإنسانية</div>
+    <div class="grid">
+      <div class="card"><div class="yr">2008</div><span class="stream str-lg">لغات</span><div class="topic">رومانسي إنساني</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=33" target="_blank">📄 موضوع + حل</a></div></div>
+      <div class="card"><div class="yr">2015</div><span class="stream str-sc">علمي</span><div class="topic">ميخائيل نعيمة</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=24" target="_blank">📄 موضوع + حل</a></div></div>
+      <div class="card"><div class="yr">2019</div><span class="stream str-sc">علمي</span><div class="topic">رومانسي إنساني</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=28" target="_blank">📄 موضوع + حل</a></div></div>
+      <div class="card"><div class="yr">2020</div><span class="stream str-ad">آداب</span><div class="topic">رومانسي إنساني</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=61" target="_blank">📄 موضوع + حل</a></div></div>
+    </div>
+    <div class="sub-lbl">◆ مدرسة الصنعة اللفظية — البشير الإبراهيمي</div>
+    <div class="grid">
+      <div class="card"><div class="yr">2008</div><span class="stream str-ad">آداب</span><div class="topic">الإبراهيمي</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=56" target="_blank">📄 موضوع + حل</a></div></div>
+      <div class="card"><div class="yr">2013</div><span class="stream str-lg">لغات</span><div class="topic">الإبراهيمي</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=38" target="_blank">📄 موضوع + حل</a></div></div>
+      <div class="card"><div class="yr">2018</div><span class="stream str-ad">آداب</span><div class="topic">الإبراهيمي</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=67" target="_blank">📄 موضوع + حل</a></div></div>
+      <div class="card"><div class="yr">2025 <span class="new-tag">جديد</span></div><span class="stream str-sc">علمي</span><div class="topic">الإبراهيمي</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=646" target="_blank">📄 موضوع + حل</a></div></div>
+    </div>
+    <div class="sub-lbl">◆ المقال السياسي والفكري والنقدي</div>
+    <div class="grid">
+      <div class="card"><div class="yr">2013</div><span class="stream str-sc">علمي</span><div class="topic">سياسي</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=22" target="_blank">📄 موضوع + حل</a></div></div>
+      <div class="card"><div class="yr">2016</div><span class="stream str-sc">علمي</span><div class="topic">نقدي</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=25" target="_blank">📄 موضوع + حل</a></div></div>
+      <div class="card"><div class="yr">2022</div><span class="stream str-sc">علمي</span><div class="topic">سياسي</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=31" target="_blank">📄 موضوع + حل</a></div></div>
+      <div class="card"><div class="yr">2023</div><span class="stream str-sc">علمي</span><div class="topic">فكري</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=32" target="_blank">📄 موضوع + حل</a></div></div>
+      <div class="card"><div class="yr">2025 <span class="new-tag">جديد</span></div><span class="stream str-sc">علمي</span><div class="topic">نقدي</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=646" target="_blank">📄 موضوع + حل</a></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ███ 4 ████████████████████████████████████████ -->
+<div class="sec s4">
+  <div class="sec-head" onclick="this.closest('.sec').classList.toggle('open')">
+    <div class="num">٤</div>
+    <div class="sec-info">
+      <div class="sec-title">شعر الالتزام</div>
+      <div class="sec-sub">القضية الفلسطينية · الثورة الجزائرية · القضايا العربية</div>
+    </div>
+    <div class="arrow">›</div>
+  </div>
+  <div class="sec-body">
+    <div class="sub-lbl">◆ القضية الفلسطينية</div>
+    <div class="grid">
+      <div class="card"><div class="yr">2012</div><span class="stream str-sc">علمي</span><div class="topic">محمود درويش</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=21" target="_blank">📄 موضوع + حل</a></div></div>
+      <div class="card"><div class="yr">2012</div><span class="stream str-lg">لغات</span><div class="topic">شعر رمزي (صعب)</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=37" target="_blank">📄 موضوع + حل</a></div></div>
+      <div class="card"><div class="yr">2017</div><span class="stream str-ad">آداب</span><div class="topic">فلسطين</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=74" target="_blank">📄 موضوع + حل</a></div></div>
+      <div class="card"><div class="yr">2019</div><span class="stream str-ad">آداب</span><div class="topic">فلسطين — شعر حر</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=76" target="_blank">📄 موضوع + حل</a></div></div>
+    </div>
+    <div class="sub-lbl">◆ الثورة الجزائرية</div>
+    <div class="grid">
+      <div class="card"><div class="yr">2010</div><span class="stream str-sc">علمي</span><div class="topic">مفدي زكريا</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=19" target="_blank">📄 موضوع + حل</a></div></div>
+      <div class="card"><div class="yr">2011</div><span class="stream str-ad">آداب</span><div class="topic">الثورة الجزائرية</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=57" target="_blank">📄 موضوع + حل</a></div></div>
+      <div class="card"><div class="yr">2012</div><span class="stream str-ad">آداب</span><div class="topic">الثورة الجزائرية</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=58" target="_blank">📄 موضوع + حل</a></div></div>
+      <div class="card"><div class="yr">2016</div><span class="stream str-ad">آداب</span><div class="topic">الثورة الجزائرية</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=69" target="_blank">📄 موضوع + حل</a></div></div>
+      <div class="card"><div class="yr">2019</div><span class="stream str-lg">لغات</span><div class="topic">الثورة الجزائرية</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=44" target="_blank">📄 موضوع + حل</a></div></div>
+      <div class="card"><div class="yr">2025 <span class="new-tag">جديد</span></div><span class="stream str-lg">لغات</span><div class="topic">الثورة الجزائرية</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=648" target="_blank">📄 موضوع + حل</a></div></div>
+    </div>
+    <div class="sub-lbl">◆ الالتزام الاجتماعي والقضايا العربية</div>
+    <div class="grid">
+      <div class="card"><div class="yr">2009</div><span class="stream str-ad">آداب</span><div class="topic">الالتزام الاجتماعي</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=55" target="_blank">📄 موضوع + حل</a></div></div>
+      <div class="card"><div class="yr">2013</div><span class="stream str-sc">علمي</span><div class="topic">الالتزام الاجتماعي</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=22" target="_blank">📄 موضوع + حل</a></div></div>
+      <div class="card"><div class="yr">2015</div><span class="stream str-sc">علمي</span><div class="topic">لبنان — قضية عربية</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=24" target="_blank">📄 موضوع + حل</a></div></div>
+      <div class="card"><div class="yr">2022</div><span class="stream str-sc">علمي</span><div class="topic">قضايا عربية</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=31" target="_blank">📄 موضوع + حل</a></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ███ 5 ████████████████████████████████████████ -->
+<div class="sec s5">
+  <div class="sec-head" onclick="this.closest('.sec').classList.toggle('open')">
+    <div class="num">٥</div>
+    <div class="sec-info">
+      <div class="sec-title">شعر المنفى والحزن</div>
+      <div class="sec-sub">خاص بشعبتَي الآداب واللغات الأجنبية</div>
+    </div>
+    <div class="arrow">›</div>
+  </div>
+  <div class="sec-body">
+    <div class="sub-lbl">◆ شعر المنفى — الحكمة والفخر والمديح</div>
+    <div class="grid">
+      <div class="card"><div class="yr">2008</div><span class="stream str-ad">آداب</span><div class="topic">الحكمة والفخر</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=56" target="_blank">📄 موضوع + حل</a></div></div>
+      <div class="card"><div class="yr">2018</div><span class="stream str-ad">آداب</span><div class="topic">مديح نبوي — أحمد شوقي</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=67" target="_blank">📄 موضوع + حل</a></div></div>
+      <div class="card"><div class="yr">2022</div><span class="stream str-lg">لغات</span><div class="topic">شعر المنفى</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=47" target="_blank">📄 موضوع + حل</a></div></div>
+    </div>
+    <div class="sub-lbl">◆ شعر الحزن</div>
+    <div class="grid">
+      <div class="card"><div class="yr">2013</div><span class="stream str-sc">علمي</span><div class="topic">حزن لأجل فلسطين</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=22" target="_blank">📄 موضوع + حل</a></div></div>
+      <div class="card"><div class="yr">2014</div><span class="stream str-lg">لغات</span><div class="topic">الحزن</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=39" target="_blank">📄 موضوع + حل</a></div></div>
+      <div class="card"><div class="yr">2017</div><span class="stream str-ad">آداب</span><div class="topic">الحزن</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=74" target="_blank">📄 موضوع + حل</a></div></div>
+      <div class="card"><div class="yr">2019</div><span class="stream str-lg">لغات</span><div class="topic">حزن اجتماعي</div><div class="btns"><a class="btn b-m" href="https://www.dzexams.pro/ar/sujet_bac.php?s=44" target="_blank">📄 موضوع + حل</a></div></div>
+    </div>
+    <div class="note"><strong>تنبيه:</strong> هذا المحور للآداب واللغات أساساً. إذا كنت في الشعبة العلمية أولويتك المحاور 1 و3 و4.</div>
+  </div>
+</div>
+
+</div>
+<footer>جميع الروابط تُحيل لصفحات محددة على dzexams.pro — داخل كل صفحة زر تحميل PDF مباشر</footer>
+
+<script>
+document.querySelectorAll('.sec').forEach((s,i)=>{
+  s.style.cssText='opacity:0;transform:translateY(16px);transition:opacity .4s,transform .4s';
+  setTimeout(()=>s.style.cssText='opacity:1;transform:translateY(0);transition:opacity .4s,transform .4s',120+i*65);
+});
+</script>
+</body>
+</html>
